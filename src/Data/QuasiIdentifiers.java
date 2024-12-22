@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class QuasiIdentifiers {
 
+    //Quasi-identifiers are attributes in a data set that, by themselves, may not directly identify a person,
+    // but when combined with other data may enable identification of a specific person.
+    //they can be used for re-identification, so it is necessary to generalize these data.
+
     private ArrayList<ArrayList<String>> quasiIdentifiersByRows;
 
     public QuasiIdentifiers() {
