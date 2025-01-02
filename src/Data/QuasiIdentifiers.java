@@ -27,4 +27,20 @@ public class QuasiIdentifiers {
     public void setQuasiIdentifiersByRows(ArrayList<ArrayList<String>> quasiIdentifiersByRows) {
         this.quasiIdentifiersByRows = quasiIdentifiersByRows;
     }
+
+    public ArrayList<String> getRow(int i){
+        return quasiIdentifiersByRows.get(i);
+    }
+
+    public int getNumberOfRows(){
+        return quasiIdentifiersByRows.size();
+    }
+
+    public int getNUmberOfColumns(){
+        return quasiIdentifiersByRows.get(0).size();
+    }
+
+    public void insertRow(ArrayList<String> row){
+        quasiIdentifiersByRows.add(row);
+    }
 }
