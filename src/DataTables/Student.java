@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public class Student {
     private String name;
     private String surname;
-    private int age;
-    private long JMBG;
+    private String age;
+    private String JMBG;
     private String gender;
     private String city;
-    private double gpa;
+    private String gpa;
     private String indexNumber;
-    private int studyYear;
+    private String studyYear;
     private String module;
-    private long phone;
+    private String phone;
 
     private static ArrayList<Student> studentTable = new ArrayList<>();
     private static ArrayList<Student> studentTableAnonymised = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(String name, String surname, int age, long JMBG, String gender, String city, double gpa, String indexNumber, int studyYear, String module, long phone) {
+    public Student(String name, String surname, String age, String JMBG, String gender, String city, String gpa, String indexNumber, String studyYear, String module, String phone) {
         this.name = name;
         this.surname = surname;
         this.age = age;
@@ -43,11 +43,11 @@ public class Student {
         return surname;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public long getJMBG() {
+    public String getJMBG() {
         return JMBG;
     }
 
@@ -59,7 +59,7 @@ public class Student {
         return city;
     }
 
-    public double getGpa() {
+    public String getGpa() {
         return gpa;
     }
 
@@ -67,7 +67,7 @@ public class Student {
         return indexNumber;
     }
 
-    public int getStudyYear() {
+    public String getStudyYear() {
         return studyYear;
     }
 
@@ -75,7 +75,7 @@ public class Student {
         return module;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
@@ -87,11 +87,11 @@ public class Student {
         this.surname = surname;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
-    public void setJMBG(long JMBG) {
+    public void setJMBG(String JMBG) {
         this.JMBG = JMBG;
     }
 
@@ -103,7 +103,7 @@ public class Student {
         this.city = city;
     }
 
-    public void setGpa(double gpa) {
+    public void setGpa(String gpa) {
         this.gpa = gpa;
     }
 
@@ -111,7 +111,7 @@ public class Student {
         this.indexNumber = indexNumber;
     }
 
-    public void setStudyYear(int studyYear) {
+    public void setStudyYear(String studyYear) {
         this.studyYear = studyYear;
     }
 
@@ -119,7 +119,24 @@ public class Student {
         this.module = module;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age='" + age + '\'' +
+                ", JMBG='" + JMBG + '\'' +
+                ", gender='" + gender + '\'' +
+                ", city='" + city + '\'' +
+                ", gpa='" + gpa + '\'' +
+                ", indexNumber='" + indexNumber + '\'' +
+                ", studyYear='" + studyYear + '\'' +
+                ", module='" + module + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

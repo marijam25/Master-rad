@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class DBBroker {
@@ -79,15 +80,15 @@ public class DBBroker {
                 "id INT AUTO_INCREMENT PRIMARY KEY, " +
                 "name VARCHAR(255) NOT NULL, " +
                 "surname VARCHAR(255) NOT NULL, " +
-                "age INT NOT NULL, " +
-                "JMBG BIGINT NOT NULL UNIQUE, " +
+                "age VARCHAR(10) NOT NULL, " +
+                "JMBG VARCHAR(255) NOT NULL UNIQUE, " +
                 "gender VARCHAR(10), " +
                 "city VARCHAR(255), " +
-                "gpa DOUBLE, " +
+                "gpa VARCHAR(10), " +
                 "indexNumber VARCHAR(255), " +
-                "studyYear INT, " +
+                "studyYear VARCHAR(255), " +
                 "module VARCHAR(255), " +
-                "phone BIGINT" +
+                "phone VARCHAR(255)" +
                 ");";
 
 
@@ -108,25 +109,23 @@ public class DBBroker {
             throw new Exception("No active database connection. Please connect to the database first.");
         }
 
-        // SQL query for inserting a student
         String insertSQL = "INSERT INTO " + tableName + " (name, surname, age, JMBG, gender, city, gpa, indexNumber, studyYear, module, phone) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
-            // Set parameters for the query
+
             pstmt.setString(1, student.getName());
             pstmt.setString(2, student.getSurname());
-            pstmt.setInt(3, student.getAge());
-            pstmt.setLong(4, student.getJMBG());
+            pstmt.setString(3, student.getAge());
+            pstmt.setString(4, student.getJMBG());
             pstmt.setString(5, student.getGender());
             pstmt.setString(6, student.getCity());
-            pstmt.setDouble(7, student.getGpa());
+            pstmt.setString(7, student.getGpa());
             pstmt.setString(8, student.getIndexNumber());
-            pstmt.setInt(9, student.getStudyYear());
+            pstmt.setString(9, student.getStudyYear());
             pstmt.setString(10, student.getModule());
-            pstmt.setLong(11, student.getPhone());
+            pstmt.setString(11, student.getPhone());
 
-            // Execute the query
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Successfully inserted into table '" + tableName + "'.");
@@ -138,6 +137,35 @@ public class DBBroker {
         }
     }
 
+    public ArrayList<Student> getAllStudents(String tableName) {
+        ArrayList<Student> students = new ArrayList<>();
+        String query = "SELECT * FROM " + tableName;
 
+        try (PreparedStatement ps = connection.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Student student = new Student();
+                student.setName(rs.getString("name"));
+                student.setSurname(rs.getString("surname"));
+                student.setAge(rs.getString("age"));
+                student.setJMBG(rs.getString("jmbg"));
+                student.setGender(rs.getString("gender"));
+                student.setCity(rs.getString("city"));
+                student.setGpa(rs.getString("gpa"));
+                student.setIndexNumber(rs.getString("indexnumber"));
+                student.setStudyYear(rs.getString("studyyear"));
+                student.setModule(rs.getString("module"));
+                student.setPhone(rs.getString("phone"));
+
+                students.add(student);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error while executing: " + e.getMessage());
+        }
+
+        return students;
+    }
 
 }
