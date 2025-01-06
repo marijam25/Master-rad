@@ -10,22 +10,16 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 public class DBBroker {
-    private static DBBroker instance;
 
     private String username;
     private String password;
     private String url;
     private Connection connection;
 
-    private DBBroker() {
+    public DBBroker() {
         this.setDbProperties();
     }
 
-    public static DBBroker getInstance(){
-        if(instance==null)
-            instance = new DBBroker();
-        return instance;
-    }
 
     public void setDbProperties() {
         try {
@@ -81,7 +75,7 @@ public class DBBroker {
                 "name VARCHAR(255) NOT NULL, " +
                 "surname VARCHAR(255) NOT NULL, " +
                 "age VARCHAR(10) NOT NULL, " +
-                "JMBG VARCHAR(255) NOT NULL UNIQUE, " +
+                "JMBG VARCHAR(255) NOT NULL, " +
                 "gender VARCHAR(10), " +
                 "city VARCHAR(255), " +
                 "gpa VARCHAR(10), " +
