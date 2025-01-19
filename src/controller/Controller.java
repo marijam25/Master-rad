@@ -52,4 +52,13 @@ public class Controller {
         }
         return list;
     }
+
+    public ArrayList<Student> removePrivateData(ArrayList<Student> studentList){
+
+        for (Student student : studentList) {
+            student.setName("");
+            student.setSurname("");
+        }
+        return studentList;
+    }
 }

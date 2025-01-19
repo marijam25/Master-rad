@@ -8,6 +8,7 @@ public class MenuForm {
     private JButton jbuttonGenerate;
     private JButton jbuttonShowTable;
     JPanel TopPanel;
+    private JButton jbuttonAnonymize;
 
     public MenuForm() {
         jbuttonGenerate.addActionListener(new ActionListener() {
@@ -20,6 +21,12 @@ public class MenuForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ShowTableForm.changeView(Main.frame);
+            }
+        });
+        jbuttonAnonymize.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AnonymizeTableForm.changeView(Main.frame);
             }
         });
     }
