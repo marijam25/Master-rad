@@ -3,7 +3,10 @@ package DomainGeneralizationHierarchy;
 import Data.GeneralizationTable;
 import Tree.*;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DGH {
 
@@ -32,7 +35,7 @@ public class DGH {
             return "error!";
         }
         if(n.getParent()!=null)return n.getParent().getData();
-        else return null;
+        else return n.getData();
     }
 
     public static DGH generateDGH(GeneralizationTable genTable){
@@ -56,11 +59,17 @@ public class DGH {
         else return null;
     }
 
-    public static ArrayList<DGH> generateAllDGH(){
-        ArrayList<DGH> dghList = new ArrayList<>();
+    public static HashMap<String,DGH> generateAllDGH(){
+        HashMap<String,DGH> dghList = new HashMap<>();
         for(String fileName: GeneralizationTable.generalisationTableFiles){
             GeneralizationTable genTab = GeneralizationTable.readFileData(fileName);
-            dghList.add(DGH.generateDGH(genTab));
+            Path path = Paths.get(fileName);
+            String table = path.getFileName().toString();
+            int lastDotIndex = table.lastIndexOf(".");
+            if (lastDotIndex != -1) {
+                table = table.substring(0, lastDotIndex);
+            }
+            dghList.put(table,DGH.generateDGH(genTab));
         }
         return  dghList;
     }

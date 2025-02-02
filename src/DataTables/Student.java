@@ -139,4 +139,82 @@ public class Student {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+
+    public String getAttributeValue(String attributeName){
+        switch(attributeName){
+            case "Name":
+                return name;
+            case "Surname":
+                return surname;
+            case "Age":
+                return age;
+            case "JMBG":
+                return JMBG;
+            case "Gender":
+                return gender;
+            case "City":
+                return city;
+            case "Gpa":
+                return gpa;
+            case "IndexNumber":
+                return indexNumber;
+            case "StudyYear":
+                return studyYear;
+            case "Module":
+                return module;
+            case "Phone":
+                return phone;
+            default:
+                throw new IllegalArgumentException(attributeName);
+        }
+    }
+
+    public ArrayList<String> getQuasiIdentifierValues(ArrayList<String> quasiIdentifierNames){
+        ArrayList<String> quasiIdentifierValues = new ArrayList<>();
+        for(String qi : quasiIdentifierNames){
+            quasiIdentifierValues.add(this.getAttributeValue(qi));
+        }
+        return quasiIdentifierValues;
+    }
+
+    public void setAttributeValue(String attribute, String newValue) {
+        switch(attribute) {
+            case "Name":
+                this.name = newValue;
+                break;
+            case "Surname":
+                this.surname = newValue;
+                break;
+            case "Age":
+                this.age = newValue;
+                break;
+            case "JMBG":
+                this.JMBG = newValue;
+                break;
+            case "Gender":
+                this.gender = newValue;
+                break;
+            case "City":
+                this.city = newValue;
+                break;
+            case "Gpa":
+                this.gpa = newValue;
+                break;
+            case "IndexNumber":
+                this.indexNumber = newValue;
+                break;
+            case "StudyYear":
+                this.studyYear = newValue;
+                break;
+            case "Module":
+                this.module = newValue;
+                break;
+            case "Phone":
+                this.phone = newValue;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid attribute: " + attribute);
+        }
+    }
+
 }

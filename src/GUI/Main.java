@@ -3,11 +3,11 @@ package GUI;
 import DomainGeneralizationHierarchy.DGH;
 
 import javax.swing.*;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
     public static JFrame frame;
-    public static ArrayList<DGH> dgh;
+    public static HashMap<String,DGH> dgh;
 
     public static void main(String[] args) {
         frame = new JFrame("Menu");

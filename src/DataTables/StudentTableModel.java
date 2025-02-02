@@ -4,7 +4,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class StudentTableModel extends AbstractTableModel {
-    public static String[] columnNames = {"Name", "Surname", "Age", "JMBG", "Gender", "City", "Gpa", "Index Number", "Study Year", "Module", "Phone"};
+    public static String[] columnNames = {"Name", "Surname", "Age", "JMBG", "Gender", "City", "Gpa", "IndexNumber", "StudyYear", "Module", "Phone"};
     private final Class[] columnClasses = {String.class,String.class,String.class,String.class,String.class,String.class,String.class,String.class,String.class,String.class,String.class};
     private ArrayList<Student> list;
 

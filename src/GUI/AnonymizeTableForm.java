@@ -2,6 +2,7 @@ package GUI;
 
 import DataTables.Student;
 import DataTables.StudentTableModel;
+import Datafly.Anonymize;
 import DomainGeneralizationHierarchy.DGH;
 import controller.Controller;
 
@@ -10,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AnonymizeTableForm {
     private JPanel TopPanel;
@@ -37,20 +39,26 @@ public class AnonymizeTableForm {
             public void actionPerformed(ActionEvent e) {
                 String tableName = txtTableName.getText();
                 int k = Integer.parseInt(txtParameter.getText());
-                int[] arr =  list1.getSelectedIndices();
+                ArrayList<String> quasiIdentifiers = new ArrayList<>(list1.getSelectedValuesList());
 
                 ArrayList<Student> studentList = Controller.getInstance().getAll(tableName);
                 studentList = Controller.getInstance().removePrivateData(studentList);
 
-                ArrayList<Integer> attList = new ArrayList<>();
-                ArrayList<DGH> dgh = new ArrayList<>();
-                for(int j:arr){
-                    attList.add(j);
-                    dgh.add(Main.dgh.get(j));
+                HashMap<String, DGH> dghMap = new HashMap<>();
+                for(String element:quasiIdentifiers){
+                    dghMap.put(element, Main.dgh.get(element));
                 }
 
-                //continue here
+                Anonymize.dataflyAnonymize(k,quasiIdentifiers, studentList,dghMap);
+                JOptionPane.showMessageDialog(Main.frame, "Success!");
 
+                String table = tableName+"Anon";
+                Controller.getInstance().createTable(table);
+                for(Student s: studentList){
+                    Controller.getInstance().addStudent(table,s);
+                }
+
+                new Table(table);
 
             }
         });
